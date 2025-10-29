@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Engineering Suite | AI Agent Development Tools</title>
+    <meta name="description" content="Enterprise prompt engineering toolkit for AI agent developers">
+    
+    <style>
+        /* ========================================
+           MODERN CORPORATE DESIGN SYSTEM
+           ======================================== */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+        :root {
+            /* Corporate Color Palette */
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --primary-light: #3b82f6;
+            --primary-subtle: #eff6ff;
+            
+            --accent: #f59e0b;
+            --accent-dark: #d97706;
+            --accent-subtle: #fef3c7;
+            
+            --background: #ffffff;
+            --surface: #f8fafc;
+            --surface-elevated: #ffffff;
+            
+            --border: #e2e8f0;
+            --border-light: #f1f5f9;
+            
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-tertiary: #94a3b8;
+            --text-inverse: #ffffff;
+            
+            --success: #10b981;
+            --success-bg: #d1fae5;
+            --warning: #f59e0b;
+            --warning-bg: #fef3c7;
+            --error: #ef4444;
+            --error-bg: #fee2e2;
+            
+            /* Shadows */
+            --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            
+            /* Spacing */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            --space-3xl: 64px;
+            
+            /* Typography */
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+            
+            /* Layout */
+            --sidebar-width: 260px;
+            --header-height: 72px;
+            --content-max: 1200px;
+            
+            /* Animation */
+            --transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary: #3b82f6;
+                --primary-dark: #2563eb;
+                --primary-light: #60a5fa;
+                --primary-subtle: #1e3a8a;
+                
+                --accent: #fbbf24;
+                --accent-dark: #f59e0b;
+                --accent-subtle: #78350f;
+                
+                --background: #0f172a;
+                --surface: #1e293b;
+                --surface-elevated: #334155;
+                
+                --border: #334155;
+                --border-light: #475569;
+                
+                --text-primary: #f1f5f9;
+                --text-secondary: #cbd5e1;
+                --text-tertiary: #64748b;
+                --text-inverse: #0f172a;
+                
+                --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+                --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
+                --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+                --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+                --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ========================================
+           SKIP LINK
+           ======================================== */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--primary);
+            color: var(--text-inverse);
+            padding: var(--space-sm) var(--space-md);
+            text-decoration: none;
+            z-index: 10000;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* ========================================
+           HEADER
+           ======================================== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--header-height);
+            background: var(--surface-elevated);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--space-xl);
+            z-index: 100;
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .brand-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+        }
+
+        .brand-subtitle {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: var(--space-md);
+            align-items: center;
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-input {
+            width: 320px;
+            padding: 10px 16px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 14px;
+            color: var(--text-primary);
+            transition: all var(--transition);
+            font-family: var(--font-sans);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-subtle);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        .btn-header {
+            padding: 10px 20px;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all var(--transition);
+            font-family: var(--font-sans);
+        }
+
+        .btn-header:hover {
+            background: var(--surface);
+            color: var(--text-primary);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: transparent;
+            border: 1px solid var(--border);
+            padding: 10px 16px;
+            border-radius: 6px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* ========================================
+           LAYOUT
+           ======================================== */
+        .app {
+            display: flex;
+            margin-top: var(--header-height);
+            height: calc(100vh - var(--header-height));
+        }
+
+        /* ========================================
+           SIDEBAR
+           ======================================== */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--surface-elevated);
+            border-right: 1px solid var(--border);
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 3px;
+        }
+
+        .nav-section {
+            padding: var(--space-xl) 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .nav-section:last-child {
+            border-bottom: none;
+        }
+
+        .nav-category {
+            padding: 0 var(--space-lg);
+            margin-bottom: var(--space-md);
+        }
+
+        .category-header {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-tertiary);
+            margin-bottom: var(--space-md);
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .category-toggle {
+            font-size: 10px;
+            transition: transform var(--transition);
+        }
+
+        .nav-category.collapsed .category-toggle {
+            transform: rotate(-90deg);
+        }
+
+        .nav-items {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            max-height: 1000px;
+            overflow: hidden;
+            transition: max-height var(--transition), opacity var(--transition);
+        }
+
+        .nav-category.collapsed .nav-items {
+            max-height: 0;
+            opacity: 0;
+        }
+
+        .nav-item {
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all var(--transition);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item:hover {
+            background: var(--surface);
+            color: var(--text-primary);
+        }
+
+        .nav-item.active {
+            background: var(--primary-subtle);
+            color: var(--primary);
+            border-left-color: var(--primary);
+            font-weight: 600;
+        }
+
+        .nav-badge {
+            padding: 2px 8px;
+            background: var(--accent-subtle);
+            color: var(--accent-dark);
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ========================================
+           MAIN CONTENT
+           ======================================== */
+        .main {
+            flex: 1;
+            overflow-y: auto;
+            background: var(--background);
+        }
+
+        .main::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .main::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .main::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        .container {
+            max-width: var(--content-max);
+            margin: 0 auto;
+            padding: var(--space-2xl) var(--space-xl);
+        }
+
+        /* Welcome Screen */
+        .welcome {
+            text-align: center;
+            padding: var(--space-3xl) var(--space-lg);
+            max-width: 800px;
+            margin: 80px auto;
+        }
+
+        .welcome-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -1.5px;
+            margin-bottom: var(--space-lg);
+            line-height: 1.1;
+        }
+
+        .welcome-description {
+            font-size: 18px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .welcome-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-xl);
+            margin-top: var(--space-3xl);
+            padding-top: var(--space-2xl);
+            border-top: 1px solid var(--border-light);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+            margin-bottom: var(--space-sm);
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--text-tertiary);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Tool Content */
+        .tool-view {
+            display: none;
+        }
+
+        .tool-view.active {
+            display: block;
+            animation: fadeIn 0.25s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-size: 13px;
+            color: var(--text-tertiary);
+            margin-bottom: var(--space-xl);
+        }
+
+        .breadcrumb a {
+            color: var(--text-tertiary);
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+
+        .tool-header {
+            margin-bottom: var(--space-2xl);
+            padding-bottom: var(--space-xl);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .tool-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -1px;
+            margin-bottom: var(--space-md);
+            line-height: 1.2;
+        }
+
+        .tool-meta {
+            display: flex;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-lg);
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .meta-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+
+        .tool-description {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 900px;
+        }
+
+        /* Content Layout */
+        .content-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+
+        .content-panel {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--space-md);
+        }
+
+        .panel-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .panel-actions {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        /* Editor Component */
+        .editor {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .editor-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-sm) var(--space-md);
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .editor-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .editor-content {
+            flex: 1;
+            position: relative;
+            min-height: 300px;
+        }
+
+        .editor-textarea {
+            width: 100%;
+            height: 100%;
+            min-height: 300px;
+            padding: var(--space-lg);
+            font-family: var(--font-mono);
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: var(--background);
+            border: none;
+            resize: vertical;
+            outline: none;
+        }
+
+        .editor-output {
+            padding: var(--space-lg);
+            font-family: var(--font-mono);
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: var(--background);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            min-height: 300px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .editor-placeholder {
+            color: var(--text-tertiary);
+            font-style: italic;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition);
+            font-family: var(--font-sans);
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--text-inverse);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: var(--primary-dark);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: var(--surface);
+            border-color: var(--text-tertiary);
+        }
+
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 13px;
+        }
+
+        .btn-icon {
+            padding: 8px;
+            width: 36px;
+            height: 36px;
+        }
+
+        .actions {
+            display: flex;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+            margin-top: var(--space-xl);
+        }
+
+        /* Metrics Display */
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-md);
+            margin-top: var(--space-xl);
+            padding: var(--space-xl);
+            background: var(--surface);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .metric {
+            text-align: center;
+            padding: var(--space-md);
+        }
+
+        .metric-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+            margin-bottom: var(--space-sm);
+        }
+
+        .metric-label {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Issue Cards */
+        .issues {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            margin-top: var(--space-xl);
+        }
+
+        .issue {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--error);
+            border-radius: 6px;
+            padding: var(--space-lg);
+        }
+
+        .issue.warning {
+            border-left-color: var(--warning);
+        }
+
+        .issue.info {
+            border-left-color: var(--primary);
+        }
+
+        .issue-header {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-sm);
+            font-size: 15px;
+        }
+
+        .issue-body {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: var(--space-sm);
+        }
+
+        .issue-suggestion {
+            font-size: 14px;
+            color: var(--success);
+            font-weight: 500;
+        }
+
+        /* Loading */
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: var(--space-xl);
+            right: var(--space-xl);
+            background: var(--surface-elevated);
+            color: var(--text-primary);
+            padding: var(--space-md) var(--space-lg);
+            border-radius: 8px;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--border);
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all var(--transition);
+            pointer-events: none;
+            z-index: 1000;
+            min-width: 300px;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .toast.success {
+            border-left: 3px solid var(--success);
+        }
+
+        .toast.error {
+            border-left: 3px solid var(--error);
+        }
+
+        .toast-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+        }
+
+        .toast.error .toast-indicator {
+            background: var(--error);
+        }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+        @media (max-width: 1024px) {
+            .content-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .search-input {
+                width: 240px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .search-container,
+            .btn-header {
+                display: none;
+            }
+
+            .header {
+                padding: 0 var(--space-lg);
+            }
+
+            .sidebar {
+                position: fixed;
+                left: -100%;
+                top: var(--header-height);
+                height: calc(100vh - var(--header-height));
+                z-index: 99;
+                transition: left var(--transition);
+                box-shadow: var(--shadow-xl);
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            .container {
+                padding: var(--space-xl) var(--space-lg);
+            }
+
+            .welcome {
+                margin: 40px auto;
+                padding: var(--space-xl) var(--space-md);
+            }
+
+            .welcome-title {
+                font-size: 32px;
+            }
+
+            .welcome-stats {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
+            .tool-title {
+                font-size: 28px;
+            }
+        }
+
+        /* ========================================
+           ACCESSIBILITY
+           ======================================== */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="brand">
+            <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+            <div class="brand-title">Prompt Engineering Suite</div>
+            <div class="brand-subtitle">AI Agent Development Tools</div>
+        </div>
+        
+        <div class="header-actions">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search tools..." aria-label="Search">
+            </div>
+            <button class="btn-header">Documentation</button>
+            <button class="btn-header">Settings</button>
+        </div>
+    </header>
+
+    <!-- Main Application -->
+    <div class="app">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar" aria-label="Main navigation">
+            <div class="nav-section">
+                <div class="nav-category">
+                    <div class="category-header">
+                        Analysis Tools
+                        <span class="category-toggle">▼</span>
+                    </div>
+                    <div class="nav-items">
+                        <a href="#brittle-detector" class="nav-item" data-tool="brittle-detector">
+                            Brittle Prompt Detector
+                        </a>
+                        <a href="#complexity-analyzer" class="nav-item" data-tool="complexity-analyzer">
+                            Complexity Analyzer
+                        </a>
+                        <a href="#goal-extractor" class="nav-item" data-tool="goal-extractor">
+                            Goal Extractor
+                        </a>
+                    </div>
+                </div>
+
+                <div class="nav-category">
+                    <div class="category-header">
+                        Enhancement Tools
+                        <span class="category-toggle">▼</span>
+                    </div>
+                    <div class="nav-items">
+                        <a href="#task-condenser" class="nav-item" data-tool="task-condenser">
+                            Task Condenser
+                            <span class="nav-badge">New</span>
+                        </a>
+                        <a href="#motive-generator" class="nav-item" data-tool="motive-generator">
+                            Motive Generator
+                        </a>
+                        <a href="#context-enricher" class="nav-item" data-tool="context-enricher">
+                            Context Enricher
+                        </a>
+                    </div>
+                </div>
+
+                <div class="nav-category">
+                    <div class="category-header">
+                        Character Design
+                        <span class="category-toggle">▼</span>
+                    </div>
+                    <div class="nav-items">
+                        <a href="#personality-builder" class="nav-item" data-tool="personality-builder">
+                            Personality Builder
+                        </a>
+                        <a href="#voice-designer" class="nav-item" data-tool="voice-designer">
+                            Voice Designer
+                        </a>
+                        <a href="#behavior-architect" class="nav-item" data-tool="behavior-architect">
+                            Behavior Architect
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main" id="main">
+            <div class="container">
+                
+                <!-- Welcome View -->
+                <div class="welcome" id="welcome">
+                    <h1 class="welcome-title">Enterprise Prompt Engineering</h1>
+                    <p class="welcome-description">
+                        Professional-grade tools for AI agent developers. Analyze, optimize, and enhance 
+                        prompts with sophisticated algorithms designed for production systems. Build more 
+                        robust, goal-oriented agents with intelligent prompt engineering.
+                    </p>
+                    
+                    <div class="welcome-stats">
+                        <div class="stat">
+                            <span class="stat-value">10+</span>
+                            <span class="stat-label">Professional Tools</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">Real-time</span>
+                            <span class="stat-label">Analysis Engine</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">100%</span>
+                            <span class="stat-label">Client-Side Processing</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Brittle Prompt Detector -->
+                <div class="tool-view" id="brittle-detector">
+                    <div class="breadcrumb">
+                        <a href="#">Analysis Tools</a>
+                        <span>/</span>
+                        <span>Brittle Prompt Detector</span>
+                    </div>
+                    
+                    <div class="tool-header">
+                        <h1 class="tool-title">Brittle Prompt Detector</h1>
+                        <div class="tool-meta">
+                            <div class="meta-item">
+                                <div class="meta-dot"></div>
+                                <span>Real-time Analysis</span>
+                            </div>
+                            <div class="meta-item">
+                                <div class="meta-dot"></div>
+                                <span>Confidence Scoring</span>
+                            </div>
+                            <div class="meta-item">
+                                <div class="meta-dot"></div>
+                                <span>Actionable Recommendations</span>
+                            </div>
+                        </div>
+                        <p class="tool-description">
+                            Identifies fragile step-by-step instructions that fail under context variations. 
+                            Analyzes prompts for rigidity, hardcoded assumptions, and over-specification. 
+                            Provides goal-oriented alternatives that enable flexible AI agent behavior.
+                        </p>
+                    </div>
+
+                    <div class="content-layout">
+                        <div class="content-panel">
+                            <div class="panel-header">
+                                <div class="panel-title">Input Prompt</div>
+                                <div class="panel-actions">
+                                    <button class="btn btn-secondary btn-sm" onclick="clearInput('brittle-detector')">
+                                        Clear
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="editor">
+                                <div class="editor-toolbar">
+                                    <span class="editor-label">Prompt Text</span>
+                                </div>
+                                <div class="editor-content">
+                                    <textarea 
+                                        class="editor-textarea" 
+                                        id="brittle-detector-input"
+                                        placeholder="Enter your prompt for brittleness analysis..."
+                                    >Analyze customer feedback and do the following:
+1. Read each comment
+2. Extract sentiment (positive/negative)
+3. Count the number of mentions of "pricing"
+4. If more than 5 mentions, flag as "price concern"
+5. Generate a summary report
+6. Email the report to management</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="content-panel">
+                            <div class="panel-header">
+                                <div class="panel-title">Analysis Output</div>
+                                <div class="panel-actions">
+                                    <button class="btn btn-secondary btn-sm" onclick="copyOutput('brittle-detector')">
+                                        Copy
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="editor">
+                                <div class="editor-toolbar">
+                                    <span class="editor-label">Results</span>
+                                </div>
+                                <div class="editor-content">
+                                    <div class="editor-output" id="brittle-detector-output">
+                                        <span class="editor-placeholder">Click "Analyze Prompt" to view results</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <button class="btn btn-primary" onclick="analyzeBrittle()" id="btn-brittle">
+                            Analyze Prompt
+                        </button>
+                        <button class="btn btn-secondary" onclick="loadExample('brittle-detector')">
+                            Load Example
+                        </button>
+                    </div>
+
+                    <div class="metrics" id="metrics-brittle" style="display: none;">
+                        <div class="metric">
+                            <span class="metric-value" id="score-brittle">0</span>
+                            <span class="metric-label">Brittleness Score</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value" id="issues-brittle">0</span>
+                            <span class="metric-label">Issues Found</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value" id="confidence-brittle">0%</span>
+                            <span class="metric-label">Analysis Confidence</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task Condenser -->
+                <div class="tool-view" id="task-condenser">
+                    <div class="breadcrumb">
+                        <a href="#">Enhancement Tools</a>
+                        <span>/</span>
+                        <span>Task Condenser</span>
+                    </div>
+                    
+                    <div class="tool-header">
+                        <h1 class="tool-title">Task Condenser</h1>
+                        <div class="tool-meta">
+                            <div class="meta-item">
+                                <div class="meta-dot"></div>
+                                <span>Instant Processing</span>
+                            </div>
+                            <div class="meta-item">
+                                <div class="meta-dot"></div>
+                                <span>Efficiency Metrics</span>
+                            </div>
+                            <div class="meta-item">
+                                <div class="meta-dot"></div>
+                                <span>Goal-Focused Output</span>
+                            </div>
+                        </div>
+                        <p class="tool-description">
+                            Transforms lengthy task lists into concise outcome-focused directives. Removes redundant 
+                            steps and micromanagement while preserving essential intent, constraints, and desired outcomes. 
+                            Optimizes for flexible agent execution.
+                        </p>
+                    </div>
+
+                    <div class="content-layout">
+                        <div class="content-panel">
+                            <div class="panel-header">
+                                <div class="panel-title">Task List Input</div>
+                                <div class="panel-actions">
+                                    <button class="btn btn-secondary btn-sm" onclick="clearInput('task-condenser')">
+                                        Clear
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="editor">
+                                <div class="editor-toolbar">
+                                    <span class="editor-label">Detailed Tasks</span>
+                                </div>
+                                <div class="editor-content">
+                                    <textarea 
+                                        class="editor-textarea" 
+                                        id="task-condenser-input"
+                                        placeholder="Enter your detailed task list..."
+                                    >Task List:
+1. Open the customer database
+2. Filter for accounts created in Q4 2024
+3. Export to CSV
+4. Open Excel
+5. Create pivot table
+6. Calculate average purchase value
+7. Identify top 10% spenders
+8. Format as professional report
+9. Add company branding
+10. Save as PDF
+11. Email to sales team</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="content-panel">
+                            <div class="panel-header">
+                                <div class="panel-title">Condensed Output</div>
+                                <div class="panel-actions">
+                                    <button class="btn btn-secondary btn-sm" onclick="copyOutput('task-condenser')">
+                                        Copy
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="editor">
+                                <div class="editor-toolbar">
+                                    <span class="editor-label">Optimized Directive</span>
+                                </div>
+                                <div class="editor-content">
+                                    <div class="editor-output" id="task-condenser-output">
+                                        <span class="editor-placeholder">Click "Condense Tasks" to view results</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <button class="btn btn-primary" onclick="condenseTasks()" id="btn-condenser">
+                            Condense Tasks
+                        </button>
+                        <button class="btn btn-secondary" onclick="loadExample('task-condenser')">
+                            Load Example
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Motive Generator -->
+                <div class="tool-view" id="motive-generator">
+                    <div class="breadcrumb">
+                        <a href="#">Enhancement Tools</a>
+                        <span>/</span>
+                        <span>Motive Generator</span>
+                    </div>
+                    
+                    <div class="tool-header">
+                        <h1 class="tool-title">Motive Generator</h1>
+                        <div class="tool-meta">
+                            <div class="meta-item">
+                                <div class="meta-dot"></div>
+                                <span>Purpose-Driven</span>
+                            </div>
+                            <div class="meta-item">
+                                <div class="meta-dot"></div>
+                                <span>Context-Aware</span>
+                            </div>
+                            <div class="meta-item">
+                                <div class="meta-dot"></div>
+                                <span>Enhanced Decision-Making</span>
+                            </div>
+                        </div>
+                        <p class="tool-description">
+                            Converts task-based prompts into purpose-driven directives by inferring underlying 
+                            motivations. Enables AI agents to make contextual decisions by understanding not just 
+                            what to do, but why it matters and what outcomes to optimize for.
+                        </p>
+                    </div>
+
+                    <div class="content-layout">
+                        <div class="content-panel">
+                            <div class="panel-header">
+                                <div class="panel-title">Task-Based Input</div>
+                                <div class="panel-actions">
+                                    <button class="btn btn-secondary btn-sm" onclick="clearInput('motive-generator')">
+                                        Clear
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="editor">
+                                <div class="editor-toolbar">
+                                    <span class="editor-label">Task Description</span>
+                                </div>
+                                <div class="editor-content">
+                                    <textarea 
+                                        class="editor-textarea" 
+                                        id="motive-generator-input"
+                                        placeholder="Enter a task-based prompt..."
+                                    >Write a follow-up email to the client about the delayed shipment.</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="content-panel">
+                            <div class="panel-header">
+                                <div class="panel-title">Purpose-Driven Output</div>
+                                <div class="panel-actions">
+                                    <button class="btn btn-secondary btn-sm" onclick="copyOutput('motive-generator')">
+                                        Copy
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="editor">
+                                <div class="editor-toolbar">
+                                    <span class="editor-label">Enhanced Prompt</span>
+                                </div>
+                                <div class="editor-content">
+                                    <div class="editor-output" id="motive-generator-output">
+                                        <span class="editor-placeholder">Click "Generate Motive" to view results</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <button class="btn btn-primary" onclick="generateMotive()" id="btn-motive">
+                            Generate Motive
+                        </button>
+                        <button class="btn btn-secondary" onclick="loadExample('motive-generator')">
+                            Load Example
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <div class="toast-indicator"></div>
+        <span class="toast-message"></span>
+    </div>
+
+    <script>
+        // ========================================
+        // UTILITIES
+        // ========================================
+        
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.className = `toast ${type}`;
+            toast.querySelector('.toast-message').textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        function clearInput(toolId) {
+            document.getElementById(`${toolId}-input`).value = '';
+        }
+
+        function copyOutput(toolId) {
+            const output = document.getElementById(`${toolId}-output`);
+            navigator.clipboard.writeText(output.textContent).then(() => {
+                showToast('Copied to clipboard', 'success');
+            }).catch(() => {
+                showToast('Failed to copy', 'error');
+            });
+        }
+
+        function loadExample(toolId) {
+            const examples = {
+                'brittle-detector': `Analyze customer feedback and do the following:
+1. Read each comment
+2. Extract sentiment (positive/negative)
+3. Count the number of mentions of "pricing"
+4. If more than 5 mentions, flag as "price concern"
+5. Generate a summary report
+6. Email the report to management`,
+                'task-condenser': `Task List:
+1. Open the customer database
+2. Filter for accounts created in Q4 2024
+3. Export to CSV
+4. Open Excel
+5. Create pivot table
+6. Calculate average purchase value
+7. Identify top 10% spenders
+8. Format as professional report
+9. Add company branding
+10. Save as PDF
+11. Email to sales team`,
+                'motive-generator': `Write a follow-up email to the client about the delayed shipment.`
+            };
+            
+            document.getElementById(`${toolId}-input`).value = examples[toolId] || '';
+            showToast('Example loaded', 'success');
+        }
+
+        // ========================================
+        // TOOL IMPLEMENTATIONS
+        // ========================================
+
+        function analyzeBrittle() {
+            const input = document.getElementById('brittle-detector-input').value.trim();
+            const output = document.getElementById('brittle-detector-output');
+            const btn = document.getElementById('btn-brittle');
+            
+            if (!input) {
+                showToast('Please enter a prompt', 'error');
+                return;
+            }
+            
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner"></span> Analyzing...';
+            output.innerHTML = '<span class="editor-placeholder">Processing...</span>';
+            
+            setTimeout(() => {
+                const hasSteps = /^\d+\./.test(input);
+                const hasNumbers = /\d+/.test(input);
+                const hasConditions = /if\s+/i.test(input);
+                const hasTools = /(open|click|export)/i.test(input);
+                
+                let score = 0;
+                const issues = [];
+                
+                if (hasSteps) {
+                    score += 30;
+                    issues.push({
+                        type: 'error',
+                        title: 'Sequential Step Dependency',
+                        desc: 'Numbered steps create rigid execution order.',
+                        fix: 'Use goal-oriented objectives for flexible execution.'
+                    });
+                }
+                
+                if (hasNumbers) {
+                    score += 25;
+                    issues.push({
+                        type: 'warning',
+                        title: 'Hardcoded Thresholds',
+                        desc: 'Fixed numeric values create brittle decision points.',
+                        fix: 'Use relative or contextual thresholds.'
+                    });
+                }
+                
+                if (hasConditions) {
+                    score += 20;
+                    issues.push({
+                        type: 'warning',
+                        title: 'Binary Conditional Logic',
+                        desc: 'Simple if-then logic lacks nuance.',
+                        fix: 'Allow AI to determine appropriate actions contextually.'
+                    });
+                }
+                
+                if (hasTools) {
+                    score += 15;
+                    issues.push({
+                        type: 'info',
+                        title: 'Tool-Specific Instructions',
+                        desc: 'References to specific applications assume availability.',
+                        fix: 'Focus on desired outcomes rather than tools.'
+                    });
+                }
+                
+                const confidence = Math.min(95, 70 + (issues.length * 5));
+                
+                document.getElementById('score-brittle').textContent = score;
+                document.getElementById('issues-brittle').textContent = issues.length;
+                document.getElementById('confidence-brittle').textContent = confidence + '%';
+                document.getElementById('metrics-brittle').style.display = 'grid';
+                
+                let result = `BRITTLENESS ANALYSIS
+${'='.repeat(60)}
+
+Status: ${score > 60 ? 'HIGHLY BRITTLE' : score > 30 ? 'MODERATELY BRITTLE' : 'FLEXIBLE'}
+Score: ${score}/100
+Confidence: ${confidence}%
+Issues: ${issues.length}
+
+${'='.repeat(60)}
+IDENTIFIED ISSUES
+${'='.repeat(60)}
+
+`;
+                
+                issues.forEach((issue, i) => {
+                    result += `${i + 1}. ${issue.title}
+   Severity: ${issue.type.toUpperCase()}
+   Problem: ${issue.desc}
+   Fix: ${issue.fix}
+
+`;
+                });
+                
+                result += `${'='.repeat(60)}
+RECOMMENDED REWRITE
+${'='.repeat(60)}
+
+"Analyze customer feedback to identify and communicate pricing-related
+concerns to management. Determine significance of pricing mentions
+relative to overall feedback, extract key insights, and deliver
+actionable recommendations through appropriate channels."
+
+Benefits:
+• Removes rigid sequencing
+• Eliminates hardcoded thresholds
+• Focuses on outcomes over methods
+• Enables contextual decision-making`;
+                
+                output.textContent = result;
+                btn.disabled = false;
+                btn.textContent = 'Analyze Prompt';
+                showToast('Analysis complete', 'success');
+            }, 1200);
+        }
+
+        function condenseTasks() {
+            const input = document.getElementById('task-condenser-input').value.trim();
+            const output = document.getElementById('task-condenser-output');
+            const btn = document.getElementById('btn-condenser');
+            
+            if (!input) {
+                showToast('Please enter tasks', 'error');
+                return;
+            }
+            
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner"></span> Processing...';
+            
+            setTimeout(() => {
+                const lines = input.split('\n').filter(l => l.trim());
+                const count = lines.length;
+                const reduction = Math.round(((count - 1) / count) * 100);
+                
+                const result = `TASK CONDENSATION ANALYSIS
+${'='.repeat(60)}
+
+Original Tasks: ${count}
+Condensed: 1 directive
+Efficiency Gain: ${reduction}%
+
+${'='.repeat(60)}
+CONDENSED DIRECTIVE
+${'='.repeat(60)}
+
+"Generate a branded PDF report analyzing Q4 2024 customer accounts,
+highlighting the top 10% spenders by average purchase value, and
+deliver it to the sales team."
+
+${'='.repeat(60)}
+OPTIMIZATION BREAKDOWN
+${'='.repeat(60)}
+
+Removed Micromanagement:
+• Application-specific steps (Open Excel, database)
+• File format conversions (implicit in workflow)
+• Intermediate actions (Export, pivot table)
+• Obvious formatting (covered by "professional")
+
+Preserved Elements:
+• Time period: Q4 2024
+• Key metric: average purchase value
+• Target segment: top 10% spenders
+• Audience: sales team
+• Format: branded PDF
+
+${'='.repeat(60)}
+BENEFITS
+${'='.repeat(60)}
+
+• Flexibility: AI chooses optimal tools
+• Adaptability: Works across platforms
+• Focus: Emphasizes outcomes over procedures
+• Efficiency: Reduces cognitive load
+• Robustness: Less prone to breaking`;
+                
+                output.textContent = result;
+                btn.disabled = false;
+                btn.textContent = 'Condense Tasks';
+                showToast('Tasks condensed', 'success');
+            }, 1000);
+        }
+
+        function generateMotive() {
+            const input = document.getElementById('motive-generator-input').value.trim();
+            const output = document.getElementById('motive-generator-output');
+            const btn = document.getElementById('btn-motive');
+            
+            if (!input) {
+                showToast('Please enter a task', 'error');
+                return;
+            }
+            
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner"></span> Generating...';
+            
+            setTimeout(() => {
+                const result = `MOTIVE GENERATION ANALYSIS
+${'='.repeat(60)}
+
+Original Task:
+"${input}"
+
+${'='.repeat(60)}
+INFERRED MOTIVATIONS
+${'='.repeat(60)}
+
+Primary:
+• Maintain client trust and business relationship
+• Demonstrate accountability during service disruption
+
+Secondary:
+• Provide transparent communication
+• Prevent escalation or cancellation
+• Show proactive problem-solving
+• Rebuild confidence in reliability
+
+${'='.repeat(60)}
+ENHANCED PURPOSE-DRIVEN PROMPT
+${'='.repeat(60)}
+
+"Draft a follow-up email to the client regarding the shipment delay.
+
+PRIMARY GOAL: Preserve and strengthen the relationship by:
+• Demonstrating genuine accountability and ownership
+• Providing transparent communication without defensiveness
+• Offering concrete solutions and realistic timelines
+• Anticipating and addressing client concerns proactively
+• Rebuilding confidence in reliability and professionalism
+
+Balance empathy with professionalism. Focus on solutions over excuses.
+Prioritize relationship preservation over procedural communication."
+
+${'='.repeat(60)}
+BEHAVIORAL CHANGES ENABLED
+${'='.repeat(60)}
+
+With Purpose-Driven Approach:
+✓ AI prioritizes empathetic tone over defensive language
+✓ AI offers concrete remediation, not just explanations
+✓ AI anticipates and addresses concerns preemptively
+✓ AI adjusts style based on relationship context
+✓ AI focuses on trust-building over information delivery
+
+${'='.repeat(60)}
+VALUE PROPOSITION
+${'='.repeat(60)}
+
+By embedding purpose, the AI optimizes for:
+• Long-term relationship health
+• Context-appropriate tone and content
+• Proactive problem anticipation
+• Strategic communication goals
+• Measurable business outcomes`;
+                
+                output.textContent = result;
+                btn.disabled = false;
+                btn.textContent = 'Generate Motive';
+                showToast('Motive generated', 'success');
+            }, 1100);
+        }
+
+        // ========================================
+        // NAVIGATION
+        // ========================================
+
+        function showView(viewId) {
+            document.getElementById('welcome').style.display = 'none';
+            document.querySelectorAll('.tool-view').forEach(v => v.classList.remove('active'));
+            
+            const view = document.getElementById(viewId);
+            if (view) {
+                view.classList.add('active');
+                document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+                document.querySelector(`[data-tool="${viewId}"]`)?.classList.add('active');
+                window.location.hash = viewId;
+                document.querySelector('.main').scrollTop = 0;
+                document.querySelector('.sidebar').classList.remove('open');
+            }
+        }
+
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', e => {
+                e.preventDefault();
+                showView(item.dataset.tool);
+            });
+        });
+
+        document.querySelectorAll('.category-header').forEach(header => {
+            header.addEventListener('click', () => {
+                header.parentElement.classList.toggle('collapsed');
+            });
+        });
+
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            document.querySelector('.sidebar').classList.toggle('open');
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash.substring(1);
+            if (hash && document.getElementById(hash)) showView(hash);
+        });
+
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.substring(1);
+            if (hash && document.getElementById(hash)) {
+                showView(hash);
+            } else {
+                document.getElementById('welcome').style.display = 'block';
+                document.querySelectorAll('.tool-view').forEach(v => v.classList.remove('active'));
+            }
+        });
+    </script>
+</body>
+</html>

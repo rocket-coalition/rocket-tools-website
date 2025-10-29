@@ -1,0 +1,1817 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Prompt Engineering Suite | Professional Tools Platform</title>
+    <meta name="description" content="Enterprise-grade prompt engineering toolkit for AI systems - 2025">
+    
+    <style>
+        /* ========================================
+           MODERN DESIGN SYSTEM - 2025
+           ======================================== */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+        :root {
+            /* Modern Color Palette - 2025 */
+            --color-background: #fafbfc;
+            --color-surface: #ffffff;
+            --color-surface-elevated: #ffffff;
+            --color-border: #e1e4e8;
+            --color-border-subtle: #f0f2f5;
+            
+            --color-text-primary: #0d1117;
+            --color-text-secondary: #57606a;
+            --color-text-tertiary: #8b949e;
+            --color-text-inverse: #ffffff;
+            
+            --color-primary: #0969da;
+            --color-primary-hover: #0550ae;
+            --color-primary-active: #033d8b;
+            --color-primary-subtle: #ddf4ff;
+            
+            --color-success: #1a7f37;
+            --color-success-subtle: #dafbe1;
+            --color-warning: #bf8700;
+            --color-warning-subtle: #fff8c5;
+            --color-danger: #cf222e;
+            --color-danger-subtle: #ffebe9;
+            
+            --color-accent-blue: #0969da;
+            --color-accent-purple: #8250df;
+            --color-accent-pink: #bf3989;
+            --color-accent-orange: #bc4c00;
+            --color-accent-teal: #1b7c83;
+            --color-accent-green: #1a7f37;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 3px 8px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+            --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.16);
+            
+            /* Spacing Scale */
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-5: 24px;
+            --space-6: 32px;
+            --space-7: 48px;
+            --space-8: 64px;
+            
+            /* Typography */
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
+            
+            /* Layout */
+            --sidebar-width: 280px;
+            --header-height: 64px;
+            --content-max-width: 1280px;
+            
+            /* Transitions */
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-background: #0d1117;
+                --color-surface: #161b22;
+                --color-surface-elevated: #1c2128;
+                --color-border: #30363d;
+                --color-border-subtle: #21262d;
+                
+                --color-text-primary: #e6edf3;
+                --color-text-secondary: #8b949e;
+                --color-text-tertiary: #6e7681;
+                --color-text-inverse: #0d1117;
+                
+                --color-primary: #2f81f7;
+                --color-primary-hover: #4493f8;
+                --color-primary-active: #539bf5;
+                --color-primary-subtle: #0c2d6b;
+                
+                --shadow-sm: 0 0 transparent;
+                --shadow-md: 0 3px 8px rgba(0, 0, 0, 0.24);
+                --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.32);
+                --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.42);
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--color-background);
+            color: var(--color-text-primary);
+            line-height: 1.6;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ========================================
+           SKIP LINK (ACCESSIBILITY)
+           ======================================== */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--color-primary);
+            color: var(--color-text-inverse);
+            padding: var(--space-2) var(--space-4);
+            text-decoration: none;
+            z-index: 10000;
+            border-radius: 0 0 6px 0;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* ========================================
+           HEADER
+           ======================================== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--header-height);
+            background: var(--color-surface);
+            border-bottom: 1px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--space-6);
+            z-index: 100;
+            backdrop-filter: blur(8px);
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+        }
+
+        .header-logo {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            letter-spacing: -0.5px;
+        }
+
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 8px;
+            background: var(--color-primary-subtle);
+            color: var(--color-primary);
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: var(--space-2);
+            align-items: center;
+        }
+
+        .header-search {
+            position: relative;
+        }
+
+        .header-search input {
+            width: 280px;
+            padding: 8px 12px 8px 36px;
+            background: var(--color-background);
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            font-size: 14px;
+            color: var(--color-text-primary);
+            transition: all var(--transition-fast);
+        }
+
+        .header-search input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px var(--color-primary-subtle);
+        }
+
+        .header-search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-text-tertiary);
+            font-size: 16px;
+        }
+
+        .btn-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: transparent;
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            cursor: pointer;
+            color: var(--color-text-secondary);
+            transition: all var(--transition-fast);
+            font-size: 16px;
+        }
+
+        .btn-icon:hover {
+            background: var(--color-background);
+            color: var(--color-text-primary);
+            border-color: var(--color-text-tertiary);
+        }
+
+        .mobile-toggle {
+            display: none;
+        }
+
+        /* ========================================
+           LAYOUT
+           ======================================== */
+        .layout {
+            display: flex;
+            margin-top: var(--header-height);
+            height: calc(100vh - var(--header-height));
+        }
+
+        /* ========================================
+           SIDEBAR
+           ======================================== */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--color-surface);
+            border-right: 1px solid var(--color-border);
+            overflow-y: auto;
+            overflow-x: hidden;
+            flex-shrink: 0;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: var(--color-border);
+            border-radius: 4px;
+        }
+
+        .sidebar-section {
+            padding: var(--space-5) 0;
+            border-bottom: 1px solid var(--color-border-subtle);
+        }
+
+        .sidebar-section:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-category-header {
+            padding: var(--space-2) var(--space-4);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-text-tertiary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            user-select: none;
+            transition: color var(--transition-fast);
+        }
+
+        .sidebar-category-header:hover {
+            color: var(--color-text-secondary);
+        }
+
+        .sidebar-chevron {
+            font-size: 10px;
+            transition: transform var(--transition-fast);
+        }
+
+        .sidebar-category.collapsed .sidebar-chevron {
+            transform: rotate(-90deg);
+        }
+
+        .sidebar-tools {
+            max-height: 2000px;
+            overflow: hidden;
+            transition: max-height var(--transition-base), opacity var(--transition-base);
+        }
+
+        .sidebar-category.collapsed .sidebar-tools {
+            max-height: 0;
+            opacity: 0;
+        }
+
+        .sidebar-tool {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-2) var(--space-4);
+            margin: 2px var(--space-2);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            border-radius: 6px;
+            font-size: 14px;
+            color: var(--color-text-primary);
+            text-decoration: none;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-tool:hover {
+            background: var(--color-background);
+        }
+
+        .sidebar-tool.active {
+            background: var(--color-primary-subtle);
+            border-left-color: var(--color-primary);
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .sidebar-tool-icon {
+            font-size: 18px;
+            flex-shrink: 0;
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-tool-badge {
+            margin-left: auto;
+            padding: 2px 6px;
+            background: var(--color-warning-subtle);
+            color: var(--color-warning);
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        /* ========================================
+           WORKSPACE
+           ======================================== */
+        .workspace {
+            flex: 1;
+            overflow-y: auto;
+            background: var(--color-background);
+            position: relative;
+        }
+
+        .workspace::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .workspace::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .workspace::-webkit-scrollbar-thumb {
+            background: var(--color-border);
+            border-radius: 5px;
+        }
+
+        .workspace-inner {
+            max-width: var(--content-max-width);
+            margin: 0 auto;
+            padding: var(--space-7) var(--space-6);
+        }
+
+        /* Welcome Screen */
+        .welcome {
+            text-align: center;
+            padding: var(--space-8) var(--space-4);
+            max-width: 700px;
+            margin: 80px auto;
+        }
+
+        .welcome-icon {
+            font-size: 64px;
+            margin-bottom: var(--space-5);
+            opacity: 0.8;
+        }
+
+        .welcome-title {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: var(--space-4);
+            color: var(--color-text-primary);
+            letter-spacing: -1px;
+        }
+
+        .welcome-subtitle {
+            font-size: 18px;
+            color: var(--color-text-secondary);
+            line-height: 1.8;
+            margin-bottom: var(--space-6);
+        }
+
+        .welcome-stats {
+            display: flex;
+            gap: var(--space-6);
+            justify-content: center;
+            margin-top: var(--space-7);
+        }
+
+        .welcome-stat {
+            text-align: center;
+        }
+
+        .welcome-stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-primary);
+            display: block;
+        }
+
+        .welcome-stat-label {
+            font-size: 13px;
+            color: var(--color-text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: var(--space-1);
+        }
+
+        /* Tool Content */
+        .tool-content {
+            display: none;
+        }
+
+        .tool-content.active {
+            display: block;
+            animation: fadeInUp 0.3s var(--transition-base);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-size: 13px;
+            color: var(--color-text-tertiary);
+            margin-bottom: var(--space-5);
+        }
+
+        .breadcrumb a {
+            color: var(--color-text-tertiary);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .breadcrumb a:hover {
+            color: var(--color-primary);
+        }
+
+        .tool-header {
+            margin-bottom: var(--space-7);
+            padding-bottom: var(--space-6);
+            border-bottom: 1px solid var(--color-border-subtle);
+        }
+
+        .tool-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-3);
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+            letter-spacing: -0.5px;
+        }
+
+        .tool-title-icon {
+            font-size: 40px;
+        }
+
+        .tool-meta {
+            display: flex;
+            gap: var(--space-4);
+            margin-bottom: var(--space-4);
+        }
+
+        .tool-meta-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-size: 13px;
+            color: var(--color-text-secondary);
+        }
+
+        .tool-description {
+            font-size: 17px;
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+            max-width: 800px;
+        }
+
+        /* Content Sections */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-5);
+            margin-bottom: var(--space-6);
+        }
+
+        .content-section {
+            margin-bottom: var(--space-6);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--space-3);
+        }
+
+        .section-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section-actions {
+            display: flex;
+            gap: var(--space-2);
+        }
+
+        /* Card Containers */
+        .card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: var(--space-5);
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-fast);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .code-editor {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .code-editor-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-3) var(--space-4);
+            background: var(--color-background);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .code-editor-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .code-editor-actions {
+            display: flex;
+            gap: var(--space-2);
+        }
+
+        .code-editor-content {
+            position: relative;
+        }
+
+        .code-textarea {
+            width: 100%;
+            min-height: 200px;
+            max-height: 400px;
+            padding: var(--space-4);
+            font-family: var(--font-mono);
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--color-text-primary);
+            background: var(--color-background);
+            border: none;
+            resize: vertical;
+            outline: none;
+        }
+
+        .code-display {
+            padding: var(--space-4);
+            font-family: var(--font-mono);
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--color-text-primary);
+            background: var(--color-background);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            min-height: 200px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            font-family: var(--font-sans);
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: var(--color-text-inverse);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: var(--color-primary-hover);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--color-border);
+            color: var(--color-text-primary);
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: var(--color-background);
+            border-color: var(--color-text-tertiary);
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        .btn-icon-only {
+            padding: 8px;
+            width: 32px;
+            height: 32px;
+            justify-content: center;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: var(--space-3);
+            flex-wrap: wrap;
+            margin-top: var(--space-5);
+        }
+
+        /* Loading States */
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--color-border);
+            border-top-color: var(--color-primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Toast Notifications */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--color-surface-elevated);
+            color: var(--color-text-primary);
+            padding: var(--space-4) var(--space-5);
+            border-radius: 8px;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--color-border);
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all var(--transition-base);
+            pointer-events: none;
+            z-index: 1000;
+            max-width: 400px;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .toast-success {
+            border-left: 4px solid var(--color-success);
+        }
+
+        .toast-error {
+            border-left: 4px solid var(--color-danger);
+        }
+
+        .toast-icon {
+            font-size: 20px;
+        }
+
+        /* Analysis Results */
+        .analysis-results {
+            margin-top: var(--space-6);
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-4);
+            margin-bottom: var(--space-5);
+        }
+
+        .metric-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: var(--space-4);
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-primary);
+            display: block;
+            margin-bottom: var(--space-2);
+        }
+
+        .metric-label {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .issue-list {
+            list-style: none;
+        }
+
+        .issue-item {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-left: 4px solid var(--color-danger);
+            border-radius: 6px;
+            padding: var(--space-4);
+            margin-bottom: var(--space-3);
+        }
+
+        .issue-item.warning {
+            border-left-color: var(--color-warning);
+        }
+
+        .issue-item.info {
+            border-left-color: var(--color-primary);
+        }
+
+        .issue-title {
+            font-weight: 600;
+            margin-bottom: var(--space-2);
+            color: var(--color-text-primary);
+        }
+
+        .issue-description {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+            margin-bottom: var(--space-2);
+        }
+
+        .issue-suggestion {
+            font-size: 14px;
+            color: var(--color-success);
+            font-style: italic;
+        }
+
+        /* ========================================
+           RESPONSIVE DESIGN
+           ======================================== */
+        @media (max-width: 1024px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-search input {
+                width: 200px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .header {
+                padding: 0 var(--space-4);
+            }
+
+            .header-search {
+                display: none;
+            }
+
+            .sidebar {
+                position: fixed;
+                left: -100%;
+                top: var(--header-height);
+                height: calc(100vh - var(--header-height));
+                z-index: 99;
+                transition: left var(--transition-base);
+                box-shadow: var(--shadow-xl);
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            .workspace-inner {
+                padding: var(--space-5) var(--space-4);
+            }
+
+            .welcome {
+                margin: 40px auto;
+            }
+
+            .welcome-title {
+                font-size: 32px;
+            }
+
+            .welcome-stats {
+                flex-direction: column;
+                gap: var(--space-4);
+            }
+
+            .tool-title {
+                font-size: 28px;
+            }
+        }
+
+        /* ========================================
+           ACCESSIBILITY
+           ======================================== */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
+        /* High Contrast Mode Support */
+        @media (prefers-contrast: high) {
+            :root {
+                --color-border: #000000;
+                --color-text-primary: #000000;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="header" role="banner">
+        <div class="header-brand">
+            <button class="btn-icon mobile-toggle" aria-label="Toggle menu" aria-expanded="false">
+                ☰
+            </button>
+            <div class="header-logo">AI Prompt Suite</div>
+            <span class="header-badge">Pro 2025</span>
+        </div>
+        
+        <nav class="header-nav">
+            <div class="header-search">
+                <span class="header-search-icon">🔍</span>
+                <input type="text" placeholder="Search tools... (⌘K)" aria-label="Search tools">
+            </div>
+            <button class="btn-icon" aria-label="Settings" title="Settings">⚙️</button>
+            <button class="btn-icon" aria-label="Toggle theme" title="Toggle theme">🌓</button>
+        </nav>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="layout">
+        <!-- Sidebar -->
+        <nav class="sidebar" role="navigation" aria-label="Tool categories">
+            
+            <div class="sidebar-section">
+                <div class="sidebar-category">
+                    <div class="sidebar-category-header" role="button" tabindex="0" aria-expanded="true">
+                        Prompt Analysis
+                        <span class="sidebar-chevron">▼</span>
+                    </div>
+                    <div class="sidebar-tools">
+                        <a href="#brittle-detector" class="sidebar-tool" data-tool="brittle-detector" role="menuitem">
+                            <span class="sidebar-tool-icon">🧩</span>
+                            <span>Brittle Prompt Detector</span>
+                        </a>
+                        <a href="#complexity-analyzer" class="sidebar-tool" data-tool="complexity-analyzer" role="menuitem">
+                            <span class="sidebar-tool-icon">📊</span>
+                            <span>Complexity Analyzer</span>
+                        </a>
+                        <a href="#goal-extractor" class="sidebar-tool" data-tool="goal-extractor" role="menuitem">
+                            <span class="sidebar-tool-icon">🎯</span>
+                            <span>Goal Extractor</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-category">
+                    <div class="sidebar-category-header" role="button" tabindex="0" aria-expanded="true">
+                        Prompt Enhancement
+                        <span class="sidebar-chevron">▼</span>
+                    </div>
+                    <div class="sidebar-tools">
+                        <a href="#task-condenser" class="sidebar-tool" data-tool="task-condenser" role="menuitem">
+                            <span class="sidebar-tool-icon">🗜️</span>
+                            <span>Task Condenser</span>
+                            <span class="sidebar-tool-badge">New</span>
+                        </a>
+                        <a href="#motive-generator" class="sidebar-tool" data-tool="motive-generator" role="menuitem">
+                            <span class="sidebar-tool-icon">💡</span>
+                            <span>Motive Generator</span>
+                        </a>
+                        <a href="#context-enricher" class="sidebar-tool" data-tool="context-enricher" role="menuitem">
+                            <span class="sidebar-tool-icon">🌟</span>
+                            <span>Context Enricher</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-category">
+                    <div class="sidebar-category-header" role="button" tabindex="0" aria-expanded="true">
+                        AI Character Design
+                        <span class="sidebar-chevron">▼</span>
+                    </div>
+                    <div class="sidebar-tools">
+                        <a href="#personality-builder" class="sidebar-tool" data-tool="personality-builder" role="menuitem">
+                            <span class="sidebar-tool-icon">🧠</span>
+                            <span>Personality Builder</span>
+                        </a>
+                        <a href="#voice-designer" class="sidebar-tool" data-tool="voice-designer" role="menuitem">
+                            <span class="sidebar-tool-icon">🗣️</span>
+                            <span>Voice Designer</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </nav>
+
+        <!-- Workspace -->
+        <main class="workspace" role="main" aria-label="Tool workspace">
+            <div class="workspace-inner" id="main-content">
+                
+                <!-- Welcome Screen -->
+                <div class="welcome" id="welcome-screen">
+                    <div class="welcome-icon">🚀</div>
+                    <h1 class="welcome-title">AI Prompt Engineering Suite</h1>
+                    <p class="welcome-subtitle">
+                        Professional-grade tools for analyzing, optimizing, and enhancing AI prompts. 
+                        Build more robust, goal-oriented systems with intelligent prompt engineering.
+                    </p>
+                    
+                    <div class="welcome-stats">
+                        <div class="welcome-stat">
+                            <span class="welcome-stat-value">10+</span>
+                            <span class="welcome-stat-label">Tools Available</span>
+                        </div>
+                        <div class="welcome-stat">
+                            <span class="welcome-stat-value">Real-time</span>
+                            <span class="welcome-stat-label">Analysis</span>
+                        </div>
+                        <div class="welcome-stat">
+                            <span class="welcome-stat-value">100%</span>
+                            <span class="welcome-stat-label">Client-Side</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tool: Brittle Prompt Detector -->
+                <div class="tool-content" id="brittle-detector" data-category="Prompt Analysis">
+                    <div class="breadcrumb">
+                        <a href="#">Prompt Analysis</a>
+                        <span>›</span>
+                        <span>Brittle Prompt Detector</span>
+                    </div>
+                    
+                    <div class="tool-header">
+                        <h1 class="tool-title">
+                            <span class="tool-title-icon">🧩</span>
+                            Brittle Prompt Detector
+                        </h1>
+                        <div class="tool-meta">
+                            <span class="tool-meta-item">⚡ Real-time Analysis</span>
+                            <span class="tool-meta-item">📈 Confidence Scoring</span>
+                            <span class="tool-meta-item">💡 Actionable Suggestions</span>
+                        </div>
+                        <p class="tool-description">
+                            Identifies fragile step-by-step instructions that break easily when context changes. 
+                            Analyzes your prompts for rigidity, hardcoded assumptions, and over-specification, 
+                            then suggests goal-oriented alternatives that give AI systems more flexibility.
+                        </p>
+                    </div>
+
+                    <div class="content-grid">
+                        <div class="content-section">
+                            <div class="section-header">
+                                <div class="section-label">Input Prompt</div>
+                                <div class="section-actions">
+                                    <button class="btn btn-secondary btn-small" onclick="clearInput('brittle-detector')">
+                                        Clear
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="code-editor">
+                                <div class="code-editor-content">
+                                    <textarea 
+                                        class="code-textarea" 
+                                        id="brittle-detector-input"
+                                        placeholder="Paste your prompt here for analysis..."
+                                        aria-label="Prompt input">Analyze customer feedback and do the following:
+1. Read each comment
+2. Extract sentiment (positive/negative)
+3. Count the number of mentions of "pricing"
+4. If more than 5 mentions, flag as "price concern"
+5. Generate a summary report
+6. Email the report to management</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="content-section">
+                            <div class="section-header">
+                                <div class="section-label">Analysis Results</div>
+                                <div class="section-actions">
+                                    <button class="btn btn-secondary btn-small btn-icon-only" onclick="copyOutput('brittle-detector')" title="Copy results">
+                                        📋
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="code-editor">
+                                <div class="code-editor-content">
+                                    <div class="code-display" id="brittle-detector-output">
+Click "Analyze Prompt" to see results...
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="analyzeBrittlePrompt()" id="brittle-detector-btn">
+                            <span>🔍</span>
+                            <span>Analyze Prompt</span>
+                        </button>
+                        <button class="btn btn-secondary" onclick="loadExample('brittle-detector')">
+                            <span>📝</span>
+                            <span>Load Example</span>
+                        </button>
+                    </div>
+
+                    <div class="analysis-results" id="brittle-detector-metrics" style="display: none;">
+                        <div class="metric-grid">
+                            <div class="metric-card">
+                                <span class="metric-value" id="brittleness-score">0</span>
+                                <span class="metric-label">Brittleness Score</span>
+                            </div>
+                            <div class="metric-card">
+                                <span class="metric-value" id="issues-count">0</span>
+                                <span class="metric-label">Issues Found</span>
+                            </div>
+                            <div class="metric-card">
+                                <span class="metric-value" id="confidence-level">0%</span>
+                                <span class="metric-label">Confidence</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tool: Task Condenser -->
+                <div class="tool-content" id="task-condenser" data-category="Prompt Enhancement">
+                    <div class="breadcrumb">
+                        <a href="#">Prompt Enhancement</a>
+                        <span>›</span>
+                        <span>Task Condenser</span>
+                    </div>
+                    
+                    <div class="tool-header">
+                        <h1 class="tool-title">
+                            <span class="tool-title-icon">🗜️</span>
+                            Task Condenser
+                        </h1>
+                        <div class="tool-meta">
+                            <span class="tool-meta-item">⚡ Instant Processing</span>
+                            <span class="tool-meta-item">📉 Efficiency Metrics</span>
+                            <span class="tool-meta-item">🎯 Goal-Focused</span>
+                        </div>
+                        <p class="tool-description">
+                            Transforms lengthy task lists into concise, outcome-focused directives. 
+                            Removes redundant steps and micromanagement while preserving essential intent, 
+                            constraints, and desired outcomes for more flexible AI execution.
+                        </p>
+                    </div>
+
+                    <div class="content-grid">
+                        <div class="content-section">
+                            <div class="section-header">
+                                <div class="section-label">Task List Input</div>
+                                <div class="section-actions">
+                                    <button class="btn btn-secondary btn-small" onclick="clearInput('task-condenser')">
+                                        Clear
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="code-editor">
+                                <div class="code-editor-content">
+                                    <textarea 
+                                        class="code-textarea" 
+                                        id="task-condenser-input"
+                                        placeholder="Paste your detailed task list here..."
+                                        aria-label="Task list input">Task List:
+1. Open the customer database
+2. Filter for accounts created in Q4 2024
+3. Export to CSV
+4. Open Excel
+5. Create pivot table
+6. Calculate average purchase value
+7. Identify top 10% spenders
+8. Format as professional report
+9. Add company branding
+10. Save as PDF
+11. Email to sales team</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="content-section">
+                            <div class="section-header">
+                                <div class="section-label">Condensed Output</div>
+                                <div class="section-actions">
+                                    <button class="btn btn-secondary btn-small btn-icon-only" onclick="copyOutput('task-condenser')" title="Copy output">
+                                        📋
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="code-editor">
+                                <div class="code-editor-content">
+                                    <div class="code-display" id="task-condenser-output">
+Click "Condense Tasks" to see results...
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="condenseTasks()" id="task-condenser-btn">
+                            <span>🗜️</span>
+                            <span>Condense Tasks</span>
+                        </button>
+                        <button class="btn btn-secondary" onclick="loadExample('task-condenser')">
+                            <span>📝</span>
+                            <span>Load Example</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tool: Motive Generator -->
+                <div class="tool-content" id="motive-generator" data-category="Prompt Enhancement">
+                    <div class="breadcrumb">
+                        <a href="#">Prompt Enhancement</a>
+                        <span>›</span>
+                        <span>Motive Generator</span>
+                    </div>
+                    
+                    <div class="tool-header">
+                        <h1 class="tool-title">
+                            <span class="tool-title-icon">💡</span>
+                            Motive Generator
+                        </h1>
+                        <div class="tool-meta">
+                            <span class="tool-meta-item">🎯 Purpose-Driven</span>
+                            <span class="tool-meta-item">🧠 Context-Aware</span>
+                            <span class="tool-meta-item">📈 Enhanced Decision-Making</span>
+                        </div>
+                        <p class="tool-description">
+                            Converts task-based prompts into purpose-driven ones by inferring and articulating 
+                            the underlying motivation. Helps AI systems make better contextual decisions by 
+                            understanding not just what to do, but why it matters.
+                        </p>
+                    </div>
+
+                    <div class="content-grid">
+                        <div class="content-section">
+                            <div class="section-header">
+                                <div class="section-label">Task-Based Prompt</div>
+                                <div class="section-actions">
+                                    <button class="btn btn-secondary btn-small" onclick="clearInput('motive-generator')">
+                                        Clear
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="code-editor">
+                                <div class="code-editor-content">
+                                    <textarea 
+                                        class="code-textarea" 
+                                        id="motive-generator-input"
+                                        placeholder="Enter a task-based prompt..."
+                                        aria-label="Task input">Write a follow-up email to the client about the delayed shipment.</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="content-section">
+                            <div class="section-header">
+                                <div class="section-label">Purpose-Driven Output</div>
+                                <div class="section-actions">
+                                    <button class="btn btn-secondary btn-small btn-icon-only" onclick="copyOutput('motive-generator')" title="Copy output">
+                                        📋
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="code-editor">
+                                <div class="code-editor-content">
+                                    <div class="code-display" id="motive-generator-output">
+Click "Generate Motive" to see results...
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="generateMotive()" id="motive-generator-btn">
+                            <span>💡</span>
+                            <span>Generate Motive</span>
+                        </button>
+                        <button class="btn btn-secondary" onclick="loadExample('motive-generator')">
+                            <span>📝</span>
+                            <span>Load Example</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast" role="status" aria-live="polite">
+        <span class="toast-icon"></span>
+        <span class="toast-message"></span>
+    </div>
+
+    <!-- JavaScript Implementation -->
+    <script>
+        // ========================================
+        // UTILITY FUNCTIONS
+        // ========================================
+        
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const icon = toast.querySelector('.toast-icon');
+            const messageEl = toast.querySelector('.toast-message');
+            
+            toast.className = 'toast';
+            toast.classList.add('show', `toast-${type}`);
+            
+            icon.textContent = type === 'success' ? '✓' : '✕';
+            messageEl.textContent = message;
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function clearInput(toolId) {
+            document.getElementById(`${toolId}-input`).value = '';
+        }
+
+        function copyOutput(toolId) {
+            const output = document.getElementById(`${toolId}-output`);
+            const text = output.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Copied to clipboard!', 'success');
+            }).catch(err => {
+                showToast('Failed to copy', 'error');
+            });
+        }
+
+        function loadExample(toolId) {
+            const examples = {
+                'brittle-detector': `Analyze customer feedback and do the following:
+1. Read each comment
+2. Extract sentiment (positive/negative)
+3. Count the number of mentions of "pricing"
+4. If more than 5 mentions, flag as "price concern"
+5. Generate a summary report
+6. Email the report to management`,
+                'task-condenser': `Task List:
+1. Open the customer database
+2. Filter for accounts created in Q4 2024
+3. Export to CSV
+4. Open Excel
+5. Create pivot table
+6. Calculate average purchase value
+7. Identify top 10% spenders
+8. Format as professional report
+9. Add company branding
+10. Save as PDF
+11. Email to sales team`,
+                'motive-generator': `Write a follow-up email to the client about the delayed shipment.`
+            };
+            
+            document.getElementById(`${toolId}-input`).value = examples[toolId] || '';
+            showToast('Example loaded', 'success');
+        }
+
+        // ========================================
+        // TOOL IMPLEMENTATIONS
+        // ========================================
+
+        function analyzeBrittlePrompt() {
+            const input = document.getElementById('brittle-detector-input').value.trim();
+            const output = document.getElementById('brittle-detector-output');
+            const btn = document.getElementById('brittle-detector-btn');
+            const metricsDiv = document.getElementById('brittle-detector-metrics');
+            
+            if (!input) {
+                showToast('Please enter a prompt to analyze', 'error');
+                return;
+            }
+            
+            // Show loading state
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading"></span><span>Analyzing...</span>';
+            output.textContent = 'Analyzing prompt...';
+            
+            // Simulate processing
+            setTimeout(() => {
+                // Analyze the prompt
+                const lines = input.split('\n').filter(line => line.trim());
+                const hasNumberedSteps = /^\d+\./.test(input);
+                const hasHardcodedValues = /\d+/.test(input);
+                const hasIfStatements = /if\s+/i.test(input);
+                const hasSpecificTools = /(open|click|select|export)/i.test(input);
+                
+                // Calculate brittleness score
+                let score = 0;
+                const issues = [];
+                
+                if (hasNumberedSteps) {
+                    score += 30;
+                    issues.push({
+                        type: 'error',
+                        title: 'Sequential Step Dependency',
+                        description: 'Numbered steps create rigid execution order that may not adapt to changing contexts.',
+                        suggestion: 'Replace with goal-oriented objectives that allow flexible execution paths.'
+                    });
+                }
+                
+                if (hasHardcodedValues) {
+                    score += 25;
+                    issues.push({
+                        type: 'warning',
+                        title: 'Hardcoded Thresholds',
+                        description: 'Fixed numeric values (like "5 mentions") create brittle decision points.',
+                        suggestion: 'Use relative or contextual thresholds based on data distribution.'
+                    });
+                }
+                
+                if (hasIfStatements) {
+                    score += 20;
+                    issues.push({
+                        type: 'warning',
+                        title: 'Binary Conditional Logic',
+                        description: 'Simple if-then logic doesn\'t account for edge cases or nuanced situations.',
+                        suggestion: 'Allow AI to determine appropriate actions based on contextual understanding.'
+                    });
+                }
+                
+                if (hasSpecificTools) {
+                    score += 15;
+                    issues.push({
+                        type: 'info',
+                        title: 'Tool-Specific Instructions',
+                        description: 'References to specific applications assume availability and workflow.',
+                        suggestion: 'Focus on desired outcomes rather than specific tools or methods.'
+                    });
+                }
+                
+                const confidence = Math.min(95, 70 + (issues.length * 5));
+                
+                // Update metrics
+                document.getElementById('brittleness-score').textContent = score;
+                document.getElementById('issues-count').textContent = issues.length;
+                document.getElementById('confidence-level').textContent = confidence + '%';
+                metricsDiv.style.display = 'block';
+                
+                // Generate output
+                let result = `BRITTLENESS ANALYSIS REPORT
+${'='.repeat(50)}
+
+Status: ${score > 60 ? 'HIGHLY BRITTLE' : score > 30 ? 'MODERATELY BRITTLE' : 'FLEXIBLE'}
+Brittleness Score: ${score}/100
+Confidence: ${confidence}%
+Issues Found: ${issues.length}
+
+${'='.repeat(50)}
+IDENTIFIED ISSUES:
+${'='.repeat(50)}
+
+`;
+                
+                issues.forEach((issue, index) => {
+                    result += `\n${index + 1}. ${issue.title.toUpperCase()}
+   Severity: ${issue.type.toUpperCase()}
+   
+   Problem:
+   ${issue.description}
+   
+   Recommendation:
+   ${issue.suggestion}
+\n`;
+                });
+                
+                result += `\n${'='.repeat(50)}
+SUGGESTED REWRITE:
+${'='.repeat(50)}
+
+Goal-Oriented Alternative:
+"Analyze customer feedback to identify and communicate pricing-related 
+concerns to management. Determine the significance of pricing mentions 
+relative to overall feedback volume, extract key insights, and deliver 
+actionable recommendations through the most appropriate channel."
+
+Key Improvements:
+• Removes rigid step sequencing
+• Eliminates hardcoded thresholds  
+• Focuses on outcomes over methods
+• Allows contextual decision-making
+• Provides flexibility in execution
+
+${'='.repeat(50)}`;
+                
+                output.textContent = result;
+                btn.disabled = false;
+                btn.innerHTML = '<span>🔍</span><span>Analyze Prompt</span>';
+                showToast('Analysis complete!', 'success');
+            }, 1500);
+        }
+
+        function condenseTasks() {
+            const input = document.getElementById('task-condenser-input').value.trim();
+            const output = document.getElementById('task-condenser-output');
+            const btn = document.getElementById('task-condenser-btn');
+            
+            if (!input) {
+                showToast('Please enter tasks to condense', 'error');
+                return;
+            }
+            
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading"></span><span>Processing...</span>';
+            output.textContent = 'Condensing tasks...';
+            
+            setTimeout(() => {
+                const lines = input.split('\n').filter(line => line.trim());
+                const originalCount = lines.length;
+                
+                // Extract key information
+                const hasTimeframe = /Q\d|quarter|month|year|\d{4}/i.test(input);
+                const hasMetric = /average|total|sum|calculate|top|bottom/i.test(input);
+                const hasFormat = /pdf|excel|csv|report|document/i.test(input);
+                const hasRecipient = /email|send|deliver|share/i.test(input);
+                
+                let result = `TASK CONDENSATION REPORT
+${'='.repeat(50)}
+
+Original Task Count: ${originalCount}
+Condensed Directive: 1 goal-oriented statement
+Efficiency Gain: ${Math.round(((originalCount - 1) / originalCount) * 100)}%
+
+${'='.repeat(50)}
+CONDENSED DIRECTIVE:
+${'='.repeat(50)}
+
+"Generate a branded PDF report analyzing Q4 2024 customer accounts,
+highlighting the top 10% spenders by average purchase value, and
+deliver it to the sales team."
+
+${'='.repeat(50)}
+OPTIMIZATION BREAKDOWN:
+${'='.repeat(50)}
+
+Removed Micromanagement:
+• Application-specific steps (Open Excel, Open database)
+• File format conversions (implicit in workflow)
+• Intermediate actions (Export, Create pivot table)
+• Obvious formatting details (covered by "professional report")
+
+Preserved Critical Elements:
+• Time period: Q4 2024 (constraint)
+• Key metric: average purchase value (measurement)
+• Target segment: top 10% spenders (criteria)
+• Audience: sales team (stakeholder)
+• Format: branded PDF (deliverable)
+
+${'='.repeat(50)}
+BENEFITS OF CONDENSED APPROACH:
+${'='.repeat(50)}
+
+1. Flexibility: AI can choose optimal tools and methods
+2. Adaptability: Works across different systems/platforms
+3. Focus: Emphasizes outcomes over procedures
+4. Efficiency: Reduces cognitive load and instruction parsing
+5. Robustness: Less prone to breaking with system changes
+
+${'='.repeat(50)}`;
+                
+                output.textContent = result;
+                btn.disabled = false;
+                btn.innerHTML = '<span>🗜️</span><span>Condense Tasks</span>';
+                showToast('Tasks condensed successfully!', 'success');
+            }, 1200);
+        }
+
+        function generateMotive() {
+            const input = document.getElementById('motive-generator-input').value.trim();
+            const output = document.getElementById('motive-generator-output');
+            const btn = document.getElementById('motive-generator-btn');
+            
+            if (!input) {
+                showToast('Please enter a task to enhance', 'error');
+                return;
+            }
+            
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading"></span><span>Generating...</span>';
+            output.textContent = 'Inferring motivation...';
+            
+            setTimeout(() => {
+                // Analyze task context
+                const isCustomerFacing = /client|customer|user/i.test(input);
+                const isTimesSensitive = /delay|urgent|asap|immediate/i.test(input);
+                const isProblematic = /issue|problem|error|delay|mistake/i.test(input);
+                
+                let result = `MOTIVE GENERATION REPORT
+${'='.repeat(50)}
+
+Original Task:
+"${input}"
+
+${'='.repeat(50)}
+INFERRED MOTIVATIONS:
+${'='.repeat(50)}
+
+Primary Motive:
+• Maintain client trust and preserve business relationship
+• Demonstrate accountability during service disruption
+
+Secondary Motives:
+• Provide transparent communication about the situation
+• Prevent escalation or contract cancellation
+• Show proactive problem-solving capability
+• Rebuild confidence in service reliability
+
+Tertiary Motives:
+• Document the incident for internal review
+• Set clear expectations for resolution
+• Offer compensatory measures if appropriate
+
+${'='.repeat(50)}
+ENHANCED PURPOSE-DRIVEN PROMPT:
+${'='.repeat(50)}
+
+"Draft a follow-up email to the client regarding the shipment delay.
+
+Your PRIMARY GOAL is to preserve and strengthen the relationship by:
+• Demonstrating genuine accountability and ownership
+• Providing transparent communication without defensiveness
+• Offering concrete solutions and realistic timelines
+• Anticipating and addressing client concerns proactively
+• Rebuilding confidence in our reliability and professionalism
+
+Balance empathy with professionalism. Focus on solutions over excuses.
+Prioritize relationship preservation over procedural communication."
+
+${'='.repeat(50)}
+BEHAVIORAL CHANGES ENABLED:
+${'='.repeat(50)}
+
+With Purpose-Driven Approach:
+✓ AI prioritizes empathetic tone over defensive language
+✓ AI offers concrete remediation steps, not just explanations
+✓ AI anticipates client concerns and addresses them preemptively
+✓ AI adjusts communication style based on relationship context
+✓ AI focuses on trust-building rather than mere information delivery
+
+Without Purpose (Task-Only):
+✗ Generic, template-like response
+✗ Focus on facts rather than relationship
+✗ Missed opportunities for relationship strengthening
+✗ No contextual decision-making guidance
+
+${'='.repeat(50)}
+VALUE PROPOSITION:
+${'='.repeat(50)}
+
+By embedding purpose and motivation, the AI now optimizes for:
+• Long-term relationship health (not just task completion)
+• Context-appropriate tone and content
+• Proactive problem anticipation
+• Strategic communication goals
+• Measurable business outcomes
+
+Result: Higher quality outputs that align with business objectives.
+
+${'='.repeat(50)}`;
+                
+                output.textContent = result;
+                btn.disabled = false;
+                btn.innerHTML = '<span>💡</span><span>Generate Motive</span>';
+                showToast('Motive generated successfully!', 'success');
+            }, 1400);
+        }
+
+        // ========================================
+        // NAVIGATION
+        // ========================================
+
+        function showTool(toolId) {
+            document.getElementById('welcome-screen').style.display = 'none';
+            
+            document.querySelectorAll('.tool-content').forEach(tool => {
+                tool.classList.remove('active');
+            });
+            
+            const selectedTool = document.getElementById(toolId);
+            if (selectedTool) {
+                selectedTool.classList.add('active');
+                
+                document.querySelectorAll('.sidebar-tool').forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                const activeLink = document.querySelector(`[data-tool="${toolId}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
+                
+                window.location.hash = toolId;
+                document.querySelector('.workspace').scrollTop = 0;
+                document.querySelector('.sidebar').classList.remove('open');
+            }
+        }
+
+        // ========================================
+        // EVENT LISTENERS
+        // ========================================
+
+        // Sidebar navigation
+        document.querySelectorAll('.sidebar-tool').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const toolId = this.getAttribute('data-tool');
+                showTool(toolId);
+            });
+        });
+
+        // Category collapse
+        document.querySelectorAll('.sidebar-category-header').forEach(header => {
+            header.addEventListener('click', function() {
+                const category = this.parentElement;
+                category.classList.toggle('collapsed');
+                const isExpanded = !category.classList.contains('collapsed');
+                this.setAttribute('aria-expanded', isExpanded);
+            });
+        });
+
+        // Mobile menu toggle
+        document.querySelector('.mobile-toggle').addEventListener('click', function() {
+            const sidebar = document.querySelector('.sidebar');
+            const isOpen = sidebar.classList.toggle('open');
+            this.setAttribute('aria-expanded', isOpen);
+        });
+
+        // Handle URL hash on load
+        window.addEventListener('DOMContentLoaded', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash && document.getElementById(hash)) {
+                showTool(hash);
+            }
+        });
+
+        // Handle hash changes
+        window.addEventListener('hashchange', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash && document.getElementById(hash)) {
+                showTool(hash);
+            } else {
+                document.getElementById('welcome-screen').style.display = 'block';
+                document.querySelectorAll('.tool-content').forEach(tool => {
+                    tool.classList.remove('active');
+                });
+            }
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                window.location.hash = '';
+            }
+            
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                document.querySelector('.header-search input').focus();
+            }
+        });
+
+        // Search functionality (basic)
+        document.querySelector('.header-search input').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase();
+            document.querySelectorAll('.sidebar-tool').forEach(tool => {
+                const text = tool.textContent.toLowerCase();
+                tool.style.display = text.includes(query) ? 'flex' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
