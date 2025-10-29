@@ -1,0 +1,99 @@
+# ===============================================
+# Hugo Static Site
+# ===============================================
+# Hugo builds the site into /public by default
+/public/
+/resources/_gen/
+/hugo_stats.json
+
+# Ignore Hugo build lock files
+.hugo_build.lock
+
+# ===============================================
+# Node / Package Management
+# ===============================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+pnpm-lock.yaml
+
+# ===============================================
+# TailwindCSS / DaisyUI
+# ===============================================
+# Tailwind JIT cache and build outputs
+.tailwind-cache/
+*.css.map
+*.min.css
+*.min.js
+
+# ===============================================
+# Netlify Build Outputs
+# ===============================================
+.netlify/
+netlify.toml.local
+functions-build/
+dist/
+build/
+
+# ===============================================
+# Local Environment & OS Junk
+# ===============================================
+.env
+.env.local
+.env.development
+.env.production
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.code-workspace
+
+# ===============================================
+# Logs & Diagnostics
+# ===============================================
+*.log
+*.tmp
+*.bak
+*.orig
+
+# ===============================================
+# Temporary / Generated Artifacts
+# ===============================================
+tmp/
+temp/
+cache/
+coverage/
+__pycache__/
+*.pyc
+*.pyo
+
+# ===============================================
+# Hono + Netlify Serverless (Optional)
+# ===============================================
+# If you bundle or transpile Netlify functions
+/.netlify/functions-build/
+/functions/dist/
+/functions/node_modules/
+
+# ===============================================
+# Misc Development Files
+# ===============================================
+# Exclude drafts and local testing assets
+content/drafts/
+notes/
+scratch/
+design-tests/
+ai-changelog.md
+
+# ===============================================
+# AI / Prompt Files
+# ===============================================
+# You can keep public patterns in repo, but ignore local experiments
+ai-temp/
+prompts-local/
+prompt-cache/
+instruction-temp/
